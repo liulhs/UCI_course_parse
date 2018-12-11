@@ -8,7 +8,7 @@ browser = mechanicalsoup.StatefulBrowser(
 )
 
 browser.open(url)
-##browser.select_form('form[action="{}"]'.format(url))
+browser.select_form('form[action="{}"]'.format(url))
 ##browser["CourseCodes"] = code
 ##
 ##response = browser.submit_selected()
