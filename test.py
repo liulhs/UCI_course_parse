@@ -9,9 +9,9 @@ browser = mechanicalsoup.StatefulBrowser(
 
 browser.open(url)
 browser.select_form('form[action="{}"]'.format(url))
-##browser["CourseCodes"] = code
+browser["CourseCodes"] = code
 ##
-##response = browser.submit_selected()
+response = browser.submit_selected()
 ##
 ##soup = BeautifulSoup(response.text, 'lxml')
 ##td = soup.find_all(attrs={'bgcolor':'#D5E5FF'})[-1]
