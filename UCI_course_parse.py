@@ -68,8 +68,9 @@ def send_email (code):
     server.quit()
 
 if __name__ == '__main__':
-    code = input('Please input your class code: ')
-    if is_full(code):
-        print("Sorry, this class is full...")
-    else:
-        print("Your class still have avaliable spots!")
+    while True:
+        code = input('Please input your class code: ')
+        if is_full(code):
+            print("Sorry, this class is full...")
+        else:
+            print("Your class still have avaliable spots!")
