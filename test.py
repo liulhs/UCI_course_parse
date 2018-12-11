@@ -13,7 +13,8 @@ browser["CourseCodes"] = '34310'
 ##
 response = browser.submit_selected()
 ##
-##soup = BeautifulSoup(response.text, 'lxml')
+soup = BeautifulSoup(response.text, 'lxml')
+
 ##td = soup.find_all(attrs={'bgcolor':'#D5E5FF'})[-1]
 ##
 
