@@ -20,7 +20,7 @@ def is_full (code):
     url = 'https://www.reg.uci.edu/perl/WebSoc'
 
     browser = mechanicalsoup.StatefulBrowser(
-        soup_config={'features': 'lxml'},
+        # soup_config={'features': 'lxml'},
         raise_on_404=True,
     )
     browser.open(url)
