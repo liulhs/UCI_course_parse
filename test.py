@@ -1,20 +1,21 @@
-from bs4 import BeautifulSoup
-import mechanicalsoup
-url = 'https://www.reg.uci.edu/perl/WebSoc'
+import smtplib, ssl
 
-browser = mechanicalsoup.StatefulBrowser(
-    soup_config={'features': 'lxml'},
-    raise_on_404=True,
-)
+port = 587  # For starttls
+smtp_server = "smtp.gmail.com"
+sender_email = "jasonliuofficial@gmail.com"
+receiver_email = "liulhs1998@gmail.com"
+password = '112131415161lhs'
+message = """\
+Subject: Hi there
 
-browser.open(url)
-browser.select_form('form[action="{}"]'.format(url))
-browser["CourseCodes"] = '34310'
-##
-response = browser.submit_selected()
-##
-soup = BeautifulSoup(response.text, 'lxml')
+This message is sent from Python."""
 
-##td = soup.find_all(attrs={'bgcolor':'#D5E5FF'})[-1]
-##
+context = ssl.create_default_context()
+with smtplib.SMTP(smtp_server, port) as server:
+    server.ehlo()  # Can be omitted
+    server.starttls(context=context)
+    server.ehlo()  # Can be omitted
+    server.login(sender_email, password)
+    server.sendmail(sender_email, receiver_email, message)
+
 

@@ -35,13 +35,13 @@ def is_full (code):
     return td.text.strip() == 'FULL'
 
 def send_email (code):
-    subject = 'Course ({}) is not full!'.format(code)
+    subject = 'UCI Course Master: The course ({}) you are watching is not full anymore'.format(code)
     body = """\
     <html>
     <head></head>
     <body>
     <p>
-       The course {} has either an open spot or opened a waitlist.
+       The course {-} has either an open spot or opened a waitlist.
     </p>
     </body>
     </html>
