@@ -2,8 +2,7 @@ from bs4 import BeautifulSoup
 import mechanicalsoup
 
 import time
-import logging
-import datetime
+import sched
 
 import smtplib
 try:
@@ -20,7 +19,7 @@ def is_full (code):
     url = 'https://www.reg.uci.edu/perl/WebSoc'
 
     browser = mechanicalsoup.StatefulBrowser(
-        # soup_config={'features': 'lxml'},
+        soup_config={'features': 'lxml'},
         raise_on_404=True,
     )
     browser.open(url)
@@ -31,8 +30,9 @@ def is_full (code):
 
     soup = BeautifulSoup(response.text, 'lxml')
     td = soup.find_all(attrs={'bgcolor':'#D5E5FF'})[-1]
-
-    return td.text.strip() == 'FULL'
+    # print(soup.text.find("FULL")!= -1)
+    # return td.text.strip() == 'FULL'
+    return soup.text.find("FULL")!= -1
 
 def send_email (code):
     subject = 'UCI Course Master: The course ({}) you are watching is not full anymore'.format(code)
@@ -41,24 +41,24 @@ def send_email (code):
     <head></head>
     <body>
     <p>
-       The course {-} has either an open spot or opened a waitlist.
+       The course {} has either an open spot or opened a waitlist.
     </p>
     </body>
     </html>
     """.format(code)
 
-    fromaddr = "pythonscripts@caiobatista.com"
-    toaddr = [""]
+    fromaddr = "jasonliuofficial@gmail.com"
+    toaddr = ["haosonl@uci.edu","liulhs1998@gmail.com"]
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['Subject'] = subject
     msg.attach(MIMEText(body, 'html'))
 
-    server = smtplib.SMTP('smtp.yandex.com', 587)
+    server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
     server.ehlo()
-    server.login(fromaddr, "Senh@123")
+    server.login(fromaddr, "112131415161lhs")
 
     for to in toaddr:
         msg['To'] = to
@@ -68,9 +68,13 @@ def send_email (code):
     server.quit()
 
 if __name__ == '__main__':
-    while True:
-        code = input('Please input your class code: ')
-        if is_full(code):
-            print("Sorry, this class is full...")
-        else:
-            print("Your class still have avaliable spots!")
+    course_list = [34165,34166,34167,34168,34169,34170,34171,34172]
+    sent = False
+    while not sent:
+        for code in course_list:
+            if not is_full(code):
+                send_email(code)
+                sent = True
+        if not sent:
+            print('ALLFULL')
+        time.sleep(300)
