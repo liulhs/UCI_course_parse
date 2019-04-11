@@ -40,7 +40,7 @@ if __name__ == '__main__':
     code = ''
     while code != 'q':
         try:
-            code = input("Please input the course code you would like to check or press q to quit: ")
+            code = input("Please input the course code you would like to check or press q to quit: ").strip()
             if is_full(code):
                 print("Sorry, your class is still full.")
             else:
