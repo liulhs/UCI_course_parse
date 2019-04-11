@@ -37,8 +37,9 @@ def is_full (code):
 
 
 if __name__ == '__main__':
-    code = input("Please input the course code you would like to check or press q to quit: ")
+    code = ''
     while code != 'q':
+        input("Please input the course code you would like to check or press q to quit: ")
         if is_full(code):
             print("Sorry, your class is still full.")
         else:
